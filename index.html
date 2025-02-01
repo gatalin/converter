@@ -177,15 +177,8 @@
                 resultKg = value1Kg * value2Kg;
                 break;
             case '/':
-                if (value2Kg === 0) {
-                    document.getElementById('result-kg').innerText = "Cannot divide by zero";
-                    document.getElementById('result-lbs').innerText = "";
-                    return;
-                }
                 resultKg = value1Kg / value2Kg;
                 break;
-            default:
-                resultKg = 0;
         }
 
         const resultLbs = convertFromKg(resultKg, 'kg');
