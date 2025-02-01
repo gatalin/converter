@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Weight Calculator</title>
   <style>
-/* Define color variables for light mode */
+    /* Define color variables for light mode */
     :root {
       --bg-color: #F6F3ED;
       --calculator-bg: #F6F3ED;
@@ -36,8 +36,10 @@
         --error-color: #ff6b6b;
       }
     }
+
     body {
       font-family: 'Raleway', system-ui, sans-serif;
+      background-color: var(--bg-color);
       margin: 0;
       padding: 0;
       display: flex;
@@ -45,69 +47,96 @@
       align-items: center;
       min-height: 100vh;
     }
+
     .calculator {
+      background: var(--calculator-bg);
       padding: 2rem;
       width: 360px;
     }
+
     .icon {
       text-align: center;
       margin: 0 auto 1.5rem;
     }
+
     .icon svg {
       width: 40px;
       height: 40px;
+      color: var(--icon-color);
     }
+
     .calculator h2 {
       font-size: 1.5rem;
       font-weight: 600;
+      color: var(--text-color);
       margin-bottom: 1.5rem;
       text-align: center;
     }
+
     .input-group {
       display: flex;
       align-items: center;
       gap: 0.5rem;
       margin-bottom: 1rem;
     }
+
     select {
       padding: 0.5rem;
+      border: 1px solid var(--select-border);
       border-radius: 6px;
       font-family: 'Raleway', system-ui, sans-serif; 
       font-style: normal;
       font-weight: 400;
       font-size: 0.9rem;
+      color: var(--text-color);
+      background-color: var(--select-bg);
       cursor: pointer;
       transition: all 0.2s ease;
     }
+
+    select:hover {
+      border-color: var(--hover-border);
+    }
+
     input {
       flex: 1;
       padding: 0.75rem;
-      border: 1px;
+      border: 1px solid var(--input-border);
       border-radius: 6px;
       font-size: 1rem;
+      color: var(--input-text);
       outline: none;
       transition: all 0.2s ease;
       font-family: 'Raleway', system-ui, sans-serif;
     }
+
     input:focus {
+      border-color: var(--hover-border);
       box-shadow: 0 0 0 2px rgba(108, 92, 231, 0.1);
     }
+
     .operation-select {
       margin: 1rem 0;
       text-align: center;
     }
+
     .result {
       margin-top: 1rem;
       padding: 1rem;
+      background-color: var(--result-bg);
       border-radius: 6px;
       text-align: center;
     }
+
     .result-value {
       font-size: 1.1rem;
       font-weight: 500;
+      color: var(--text-color);
       margin: 0.5rem 0;
     }
+
     .error-message {
+      color: var(--error-color);
       font-size: 0.9rem;
     }
   </style>
@@ -160,7 +189,8 @@
     if (Math.abs(num) < 0.01) return "0";
     return num.toFixed(2).replace(/\.?0+$/, '');
   }
- /**
+
+  /**
    * Updates both result fields to always show the value in kg and lbs.
    * @param {number|string} value - The numeric result (or formatted string) to display.
    * @param {boolean} isError - If true, displays an error message.
@@ -180,10 +210,10 @@
     }
   }
 
-function calculate() {
-    const value1 = parseFloat(document.getElementById('value1').value) || 0; // Default to 0 if empty
+  function calculate() {
+    const value1 = parseFloat(document.getElementById('value1').value) || 0;
     const unit1 = document.getElementById('unit1').value;
-    const value2 = parseFloat(document.getElementById('value2').value) || 0; // Default to 0 if empty
+    const value2 = parseFloat(document.getElementById('value2').value) || 0;
     const unit2 = document.getElementById('unit2').value;
     const operation = document.getElementById('operation').value;
 
@@ -205,22 +235,18 @@ function calculate() {
           result = v1Kg - v2Kg;
           break;
         }
-        
       }
 
       if (!isFinite(result)) {
         throw new Error("Result is too large to display");
       }
 
-      // Always update the result in both kg and lbs.
       updateResult(result, false);
-
     } catch (error) {
       updateResult(error.message, true);
     }
   }
 
-  // Initialize event listeners for the Enter key in number inputs.
   document.addEventListener('DOMContentLoaded', () => {
     const inputs = document.querySelectorAll('input[type="number"]');
     inputs.forEach(input => {
@@ -235,3 +261,4 @@ function calculate() {
 
 </body>
 </html>
+
