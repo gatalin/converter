@@ -76,7 +76,7 @@
             width: 80px;
             height: 80px;
             margin: 0 auto 20px;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%236c5ce7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>') no-repeat center;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%236c5ce7" stroke="%236c5ce7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6h12M6 6v12M6 6l3 3m9-3l-3 3M6 18h12M6 18l3-3m9 3l-3-3"/></svg>') no-repeat center;
             background-size: contain;
             animation: bounce 2s infinite;
         }
@@ -87,16 +87,6 @@
             50% {
                 transform: translateY(-10px);
             }
-        }
-        .converter::before {
-            content: '';
-            display: block;
-            width: 100px;
-            height: 100px;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23a29bfe" stroke="%236c5ce7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>') no-repeat center;
-            background-size: cover;
-            margin: 0 auto 20px;
-            opacity: 0.8;
         }
     </style>
 </head>
