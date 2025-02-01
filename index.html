@@ -137,11 +137,11 @@
 
 <script>
     function convertToKg(value, unit) {
-        return unit === "kg" ? value : value * 2.20462;
+        return unit === "kg" ? value : value / 2.20462;
     }
 
     function convertFromKg(value, unit) {
-        return unit === "kg" ? value : value / 2.20462;
+        return unit === "kg" ? value * 2.20462 : value;
     }
 
     function formatNumber(num) {
