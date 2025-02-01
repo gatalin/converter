@@ -141,7 +141,7 @@
     }
 
     function convertFromKg(value, unit) {
-        return unit === "lbs" ? value : value * 2.20462;
+        return unit === "kg" ? value : value * 2.20462;
     }
 
     function formatNumber(num) {
@@ -188,7 +188,7 @@
                 resultKg = 0;
         }
 
-        const resultLbs = convertFromKg(resultKg, 'lbs');
+        const resultLbs = convertFromKg(resultKg, 'kg');
         
         document.getElementById('result-kg').innerText = `${formatNumber(resultKg)} kg`;
         document.getElementById('result-lbs').innerText = `${formatNumber(resultLbs)} lbs`;
