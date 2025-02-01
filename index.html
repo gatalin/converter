@@ -146,9 +146,9 @@
   }
 
   /**
-   * Actualiza los elementos de resultado según el valor y el tipo de resultado.
-   * @param {string} value - El valor a mostrar (ya formateado).
-   * @param {boolean} isError - Indica si se trata de un mensaje de error.
+   * Updates both result fields to always show the value in kg and lbs.
+   * @param {number|string} value - The numeric result (or formatted string) to display.
+   * @param {boolean} isError - If true, displays an error message.
    */
   function updateResult(value, isError = false) {
     const resultKgElement = document.getElementById('result-kg');
@@ -157,14 +157,9 @@
     if (isError) {
       resultKgElement.innerHTML = `<span class="error-message">${value}</span>`;
       resultLbsElement.innerHTML = '';
-    } else if (typeof value === 'string') {
-      // Si la cadena incluye "kg²" (multiplicación) o no incluye "kg" (division unitless)
-      // se asume que el valor ya incluye la unidad o es unitless
-      resultKgElement.innerText = value;
-      resultLbsElement.innerText = '';
     } else {
-      // Por defecto, para resultados en kg
-      const resultKg = parseFloat(value);
+      // Treat the value as a number in kg.
+      const resultKg = typeof value === 'number' ? value : parseFloat(value);
       resultKgElement.innerText = `${formatNumber(resultKg)} kg`;
       resultLbsElement.innerText = `${formatNumber(resultKg * 2.20462)} lbs`;
     }
@@ -184,31 +179,28 @@
 
     try {
       let result;
-      let resultUnit = ""; // Por defecto, sin unidad
 
       switch (operation) {
         case '+': {
-          // Para suma: convertir ambos valores a kg y sumarlos
+          // Convert both values to kg, then add.
           const value1Kg = convertToKg(value1, unit1);
           const value2Kg = convertToKg(value2, unit2);
           result = value1Kg + value2Kg;
-          resultUnit = "kg"; // Resultado en kg
           break;
         }
         case '-': {
-          // Para resta: convertir ambos valores a kg y restarlos
+          // Convert both values to kg, then subtract.
           const v1Kg = convertToKg(value1, unit1);
           const v2Kg = convertToKg(value2, unit2);
           result = v1Kg - v2Kg;
-          resultUnit = "kg"; // Resultado en kg
           break;
         }
         case '*': {
-          // Para multiplicación: convertir ambos a kg y multiplicar
+          // Convert both values to kg, then multiply.
+          // (Note: This mathematically gives kg² but we'll treat the number as a weight in kg.)
           const val1Kg = convertToKg(value1, unit1);
           const val2Kg = convertToKg(value2, unit2);
           result = val1Kg * val2Kg;
-          resultUnit = "kg²"; // Resultado en kg² (unidades al cuadrado)
           break;
         }
         case '/': {
@@ -216,15 +208,13 @@
             throw new Error("Cannot divide by zero");
           }
           if (unit1 === unit2) {
-            // Si las unidades son iguales, el resultado es unitless
+            // If units are the same, the result is computed as a ratio.
             result = value1 / value2;
-            resultUnit = ""; // Sin unidad
           } else {
-            // Si las unidades son diferentes, se convierten ambos a kg y se divide
+            // If units differ, convert both values to kg before dividing.
             const dividend = convertToKg(value1, unit1);
             const divisor = convertToKg(value2, unit2);
             result = dividend / divisor;
-            resultUnit = ""; // Sin unidad
           }
           break;
         }
@@ -236,24 +226,15 @@
         throw new Error("Result is too large to display");
       }
 
-      // Mostrar el resultado según la operación
-      if (resultUnit === "") {
-        // Resultados unitless (por división con mismas unidades o conversiones)
-        updateResult(`${formatNumber(result)}`, false);
-      } else if (resultUnit === "kg²") {
-        // Para multiplicación, mostrar con "kg²"
-        updateResult(`${formatNumber(result)} kg²`, false);
-      } else {
-        // Para suma y resta, mostrar en kg (y en lbs en el otro campo)
-        updateResult(`${formatNumber(result)} kg`, false);
-      }
+      // Always update the result in both kg and lbs.
+      updateResult(result, false);
 
     } catch (error) {
       updateResult(error.message, true);
     }
   }
 
-  // Inicializar los event listeners para el enter en los inputs
+  // Initialize event listeners for the Enter key in number inputs.
   document.addEventListener('DOMContentLoaded', () => {
     const inputs = document.querySelectorAll('input[type="number"]');
     inputs.forEach(input => {
