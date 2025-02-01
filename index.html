@@ -188,7 +188,7 @@
                 resultKg = 0;
         }
 
-        const resultLbs = convertFromKg(resultKg, 'lbs');
+        const resultLbs = convertFromKg(resultKg, 'kg');
         
         document.getElementById('result-kg').innerText = `${formatNumber(resultKg)} kg`;
         document.getElementById('result-lbs').innerText = `${formatNumber(resultLbs)} lbs`;
