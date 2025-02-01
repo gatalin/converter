@@ -114,7 +114,6 @@
     <select id="operation" onchange="calculate()">
       <option value="+">+</option>
       <option value="-">-</option>
-      <option value="*">×</option>
     </select>
   </div>
   <div class="input-group">
@@ -191,14 +190,6 @@
           const v1Kg = convertToKg(value1, unit1);
           const v2Kg = convertToKg(value2, unit2);
           result = v1Kg - v2Kg;
-          break;
-        }
-        case '*': {
-          // Convert both values to kg, then multiply.
-          // (Note: This mathematically gives kg² but we'll treat the number as a weight in kg.)
-          const val1Kg = convertToKg(value1, unit1);
-          const val2Kg = convertToKg(value2, unit2);
-          result = val1Kg * val2Kg;
           break;
         }
         
