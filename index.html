@@ -145,25 +145,6 @@
     return num.toFixed(2).replace(/\.?0+$/, '');
   }
 
-  /**
-   * Updates both result fields to always show the value in kg and lbs.
-   * @param {number|string} value - The numeric result (or formatted string) to display.
-   * @param {boolean} isError - If true, displays an error message.
-   */
-  function updateResult(value, isError = false) {
-    const resultKgElement = document.getElementById('result-kg');
-    const resultLbsElement = document.getElementById('result-lbs');
-
-    if (isError) {
-      resultKgElement.innerHTML = `<span class="error-message">${value}</span>`;
-      resultLbsElement.innerHTML = '';
-    } else {
-      // Treat the value as a number in kg.
-      const resultKg = typeof value === 'number' ? value : parseFloat(value);
-      resultKgElement.innerText = `${formatNumber(resultKg)} kg`;
-      resultLbsElement.innerText = `${formatNumber(resultKg * 2.20462)} lbs`;
-    }
-  }
 
   function calculate() {
     const value1 = parseFloat(document.getElementById('value1').value);
@@ -203,25 +184,7 @@
           result = val1Kg * val2Kg;
           break;
         }
-        case '/': {
-          if (value2 === 0) {
-            throw new Error("Cannot divide by zero");
-          }
-          if (unit1 === unit2) {
-            // If units are the same, the result is computed as a ratio.
-            const val1Lb = convertFromKg(value1, unit1);
-            const val2Lb = convertFromKg(value2, unit2);
-            result = val1Lb / val2Lb;
-          } else {
-            // If units differ, convert both values to kg before dividing.
-            const dividend = convertToKg(value1, unit1);
-            const divisor = convertToKg(value2, unit2);
-            result = dividend / divisor;
-          }
-          break;
-        }
-        default:
-          throw new Error("Invalid operation");
+        
       }
 
       if (!isFinite(result)) {
