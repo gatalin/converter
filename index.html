@@ -5,6 +5,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Weight Calculator</title>
   <style>
+/* Define color variables for light mode */
+    :root {
+      --bg-color: #F6F3ED;
+      --calculator-bg: #F6F3ED;
+      --text-color: #2E3338;
+      --icon-color: #2E3338;
+      --select-bg: #EEEBE6;
+      --select-border: #e0e0e0;
+      --input-border: #E6E8EA;
+      --input-text: #848F9A;
+      --hover-border: #6c5ce7;
+      --result-bg: #EEEBE6;
+      --error-color: #e74c3c;
+    }
+
+    /* Dark mode overrides */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-color: #121212;
+        --calculator-bg: #1F1F1F;
+        --text-color: #E0E0E0;
+        --icon-color: #E0E0E0;
+        --select-bg: #2A2A2A;
+        --select-border: #555;
+        --input-border: #333;
+        --input-text: #E0E0E0;
+        --hover-border: #8e8eff;
+        --result-bg: #2A2A2A;
+        --error-color: #ff6b6b;
+      }
+    }
     body {
       font-family: 'Raleway', system-ui, sans-serif;
       background-color: #F6F3ED;
