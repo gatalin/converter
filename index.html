@@ -144,7 +144,25 @@
     if (Math.abs(num) < 0.01) return "0";
     return num.toFixed(2).replace(/\.?0+$/, '');
   }
+ /**
+   * Updates both result fields to always show the value in kg and lbs.
+   * @param {number|string} value - The numeric result (or formatted string) to display.
+   * @param {boolean} isError - If true, displays an error message.
+   */
+  function updateResult(value, isError = false) {
+    const resultKgElement = document.getElementById('result-kg');
+    const resultLbsElement = document.getElementById('result-lbs');
 
+    if (isError) {
+      resultKgElement.innerHTML = `<span class="error-message">${value}</span>`;
+      resultLbsElement.innerHTML = '';
+    } else {
+      // Treat the value as a number in kg.
+      const resultKg = typeof value === 'number' ? value : parseFloat(value);
+      resultKgElement.innerText = `${formatNumber(resultKg)} kg`;
+      resultLbsElement.innerText = `${formatNumber(resultKg * 2.20462)} lbs`;
+    }
+  }
 
   function calculate() {
     const value1 = parseFloat(document.getElementById('value1').value);
