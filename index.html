@@ -40,6 +40,7 @@
     body {
       font-family: 'Raleway', system-ui, sans-serif;
       background-color: var(--bg-color);
+      color: var(--text-color);
       margin: 0;
       padding: 0;
       display: flex;
@@ -49,9 +50,11 @@
     }
 
     .calculator {
-      background: var(--calculator-bg);
+      background-color: var(--calculator-bg);
       padding: 2rem;
       width: 360px;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
 
     .icon {
@@ -68,9 +71,9 @@
     .calculator h2 {
       font-size: 1.5rem;
       font-weight: 600;
-      color: var(--text-color);
       margin-bottom: 1.5rem;
       text-align: center;
+      color: var(--text-color);
     }
 
     .input-group {
@@ -84,9 +87,7 @@
       padding: 0.5rem;
       border: 1px solid var(--select-border);
       border-radius: 6px;
-      font-family: 'Raleway', system-ui, sans-serif; 
-      font-style: normal;
-      font-weight: 400;
+      font-family: 'Raleway', system-ui, sans-serif;
       font-size: 0.9rem;
       color: var(--text-color);
       background-color: var(--select-bg);
@@ -105,6 +106,7 @@
       border-radius: 6px;
       font-size: 1rem;
       color: var(--input-text);
+      background-color: var(--select-bg);
       outline: none;
       transition: all 0.2s ease;
       font-family: 'Raleway', system-ui, sans-serif;
@@ -131,8 +133,8 @@
     .result-value {
       font-size: 1.1rem;
       font-weight: 500;
-      color: var(--text-color);
       margin: 0.5rem 0;
+      color: var(--text-color);
     }
 
     .error-message {
@@ -190,11 +192,6 @@
     return num.toFixed(2).replace(/\.?0+$/, '');
   }
 
-  /**
-   * Updates both result fields to always show the value in kg and lbs.
-   * @param {number|string} value - The numeric result (or formatted string) to display.
-   * @param {boolean} isError - If true, displays an error message.
-   */
   function updateResult(value, isError = false) {
     const resultKgElement = document.getElementById('result-kg');
     const resultLbsElement = document.getElementById('result-lbs');
@@ -203,7 +200,6 @@
       resultKgElement.innerHTML = `<span class="error-message">${value}</span>`;
       resultLbsElement.innerHTML = '';
     } else {
-      // Treat the value as a number in kg.
       const resultKg = typeof value === 'number' ? value : parseFloat(value);
       resultKgElement.innerText = `${formatNumber(resultKg)} kg`;
       resultLbsElement.innerText = `${formatNumber(resultKg * 2.20462)} lbs`;
@@ -222,14 +218,12 @@
 
       switch (operation) {
         case '+': {
-          // Convert both values to kg, then add.
           const value1Kg = convertToKg(value1, unit1);
           const value2Kg = convertToKg(value2, unit2);
           result = value1Kg + value2Kg;
           break;
         }
         case '-': {
-          // Convert both values to kg, then subtract.
           const v1Kg = convertToKg(value1, unit1);
           const v2Kg = convertToKg(value2, unit2);
           result = v1Kg - v2Kg;
@@ -242,11 +236,13 @@
       }
 
       updateResult(result, false);
+
     } catch (error) {
       updateResult(error.message, true);
     }
   }
 
+  // Initialize event listeners for the Enter key in number inputs.
   document.addEventListener('DOMContentLoaded', () => {
     const inputs = document.querySelectorAll('input[type="number"]');
     inputs.forEach(input => {
@@ -257,8 +253,10 @@
       });
     });
   });
+
+  // Calculate on page load to show initial results.
+  calculate();
 </script>
 
 </body>
 </html>
-
