@@ -3,90 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cute Weight Converter</title>
+    <title>Weight Converter</title>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Raleway', sans-serif;
-            background: linear-gradient(135deg, #f9f7fd, #e3dff2);
+            background-color: #ffffff; /* Match Notion's background */
+            margin: 0;
+            padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            margin: 0;
         }
         .converter {
-            background: white;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            max-width: 400px;
-            width: 100%;
+            background-color: #ffffff; /* Match Notion's background */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 240px;
             text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .converter:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
         }
         .converter h2 {
-            margin-bottom: 20px;
-            font-size: 28px;
-            color: #6c5ce7;
+            font-size: 16px;
             font-weight: 600;
+            color: #37352f;
+            margin-bottom: 16px;
         }
         .input-group {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
         }
         .converter input {
-            width: 80%;
-            padding: 12px;
-            border: 2px solid #ddd;
-            border-radius: 10px;
-            font-size: 16px;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
-            text-align: center;
+            width: 90%; /* Slightly narrower for better centering */
+            padding: 8px;
+            margin: 0 auto; /* Center the input fields */
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            font-size: 14px;
+            color: #37352f;
             outline: none;
+            transition: border-color 0.2s ease;
+            text-align: center;
         }
         .converter input:focus {
-            border-color: #a29bfe;
-            box-shadow: 0 0 10px rgba(108, 92, 231, 0.3);
+            border-color: #37352f;
         }
         .result {
-            margin-top: 20px;
-            font-size: 18px;
-            color: #6c5ce7;
+            margin-top: 16px;
+            font-size: 14px;
+            color: #37352f;
             font-weight: 500;
-            animation: fadeIn 0.5s ease;
-        }
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            text-align: center;
         }
         .icon {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 20px;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%236c5ce7" stroke="%236c5ce7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6h12M6 6v12M6 6l3 3m9-3l-3 3M6 18h12M6 18l3-3m9 3l-3-3"/></svg>') no-repeat center;
+            width: 32px;
+            height: 32px;
+            margin: 0 auto 16px;
+            background: url('data:image/svg+xml;utf8,<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M31 15H30V11C30 10.4696 29.7893 9.96086 29.4142 9.58579C29.0391 9.21071 28.5304 9 28 9H26V8C26 7.46957 25.7893 6.96086 25.4142 6.58579C25.0391 6.21071 24.5304 6 24 6H21C20.4696 6 19.9609 6.21071 19.5858 6.58579C19.2107 6.96086 19 7.46957 19 8V15H13V8C13 7.46957 12.7893 6.96086 12.4142 6.58579C12.0391 6.21071 11.5304 6 11 6H8C7.46957 6 6.96086 6.21071 6.58579 6.58579C6.21071 6.96086 6 7.46957 6 8V9H4C3.46957 9 2.96086 9.21071 2.58579 9.58579C2.21071 9.96086 2 10.4696 2 11V15H1C0.734784 15 0.48043 15.1054 0.292893 15.2929C0.105357 15.4804 0 15.7348 0 16C0 16.2652 0.105357 16.5196 0.292893 16.7071C0.48043 16.8946 0.734784 17 1 17H2V21C2 21.5304 2.21071 22.0391 2.58579 22.4142C2.96086 22.7893 3.46957 23 4 23H6V24C6 24.5304 6.21071 25.0391 6.58579 25.4142C6.96086 25.7893 7.46957 26 8 26H11C11.5304 26 12.0391 25.7893 12.4142 25.4142C12.7893 25.0391 13 24.5304 13 24V17H19V24C19 24.5304 19.2107 25.0391 19.5858 25.4142C19.9609 25.7893 20.4696 26 21 26H24C24.5304 26 25.0391 25.7893 25.4142 25.4142C25.7893 25.0391 26 24.5304 26 24V23H28C28.5304 23 29.0391 22.7893 29.4142 22.4142C29.7893 22.0391 30 21.5304 30 21V17H31C31.2652 17 31.5196 16.8946 31.7071 16.7071C31.8946 16.5196 32 16.2652 32 16C32 15.7348 31.8946 15.4804 31.7071 15.2929C31.5196 15.1054 31.2652 15 31 15ZM4 21V11H6V21H4ZM11 24H8V8H11V24ZM24 24H21V8H24V21.9775C24 21.985 24 21.9925 24 22C24 22.0075 24 22.015 24 22.0225V24ZM28 21H26V11H28V21Z" fill="%232E3338"/></svg>') no-repeat center;
             background-size: contain;
-            animation: bounce 2s infinite;
-        }
-        @keyframes bounce {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
         }
     </style>
 </head>
@@ -96,8 +73,8 @@
     <div class="icon"></div>
     <h2>Weight Converter</h2>
     <div class="input-group">
-        <input type="number" id="kilos" placeholder="Enter weight in kilograms">
-        <input type="number" id="pounds" placeholder="Enter weight in pounds">
+        <input type="number" id="kilos" placeholder="Kilograms (kg)">
+        <input type="number" id="pounds" placeholder="Pounds (lbs)">
     </div>
     <div class="result" id="result"></div>
 </div>
