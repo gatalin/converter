@@ -38,7 +38,6 @@
     }
     body {
       font-family: 'Raleway', system-ui, sans-serif;
-      background-color: #F6F3ED;
       margin: 0;
       padding: 0;
       display: flex;
@@ -47,7 +46,6 @@
       min-height: 100vh;
     }
     .calculator {
-      background: #F6F3ED;
       padding: 2rem;
       width: 360px;
     }
@@ -58,12 +56,10 @@
     .icon svg {
       width: 40px;
       height: 40px;
-      color: #2E3338;
     }
     .calculator h2 {
       font-size: 1.5rem;
       font-weight: 600;
-      color: #2E3338;
       margin-bottom: 1.5rem;
       text-align: center;
     }
@@ -75,33 +71,25 @@
     }
     select {
       padding: 0.5rem;
-      border: 1px solid #e0e0e0;
       border-radius: 6px;
       font-family: 'Raleway', system-ui, sans-serif; 
       font-style: normal;
       font-weight: 400;
       font-size: 0.9rem;
-      color: #2E3338;
-      background-color: #EEEBE6;
       cursor: pointer;
       transition: all 0.2s ease;
-    }
-    select:hover {
-      border-color: #6c5ce7;
     }
     input {
       flex: 1;
       padding: 0.75rem;
-      border: 1px solid #E6E8EA;
+      border: 1px;
       border-radius: 6px;
       font-size: 1rem;
-      color: #848F9A;
       outline: none;
       transition: all 0.2s ease;
       font-family: 'Raleway', system-ui, sans-serif;
     }
     input:focus {
-      border-color: #6c5ce7;
       box-shadow: 0 0 0 2px rgba(108, 92, 231, 0.1);
     }
     .operation-select {
@@ -111,18 +99,15 @@
     .result {
       margin-top: 1rem;
       padding: 1rem;
-      background-color: #EEEBE6;
       border-radius: 6px;
       text-align: center;
     }
     .result-value {
       font-size: 1.1rem;
       font-weight: 500;
-      color: #1a1a1a;
       margin: 0.5rem 0;
     }
     .error-message {
-      color: #e74c3c;
       font-size: 0.9rem;
     }
   </style>
