@@ -1,200 +1,270 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Advanced Weight Calculator</title>
-    <style>
-        body {
-            font-family: 'Inter', system-ui, sans-serif;
-            background-color: #f5f5f5;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-        .calculator {
-            background-color: #ffffff;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            width: 360px;
-        }
-        .icon {
-    text-align: center;
-    margin-bottom: 1rem;
-    width: 32px;
-    height: 32px;
-    margin: 0 auto 16px;
-    
-        }
-        .calculator h2 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: #1a1a1a;
-            margin-bottom: 1.5rem;
-            text-align: center;
-        }
-        .input-group {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-        }
-        select {
-            padding: 0.5rem;
-            border: 1px solid #e0e0e0;
-            border-radius: 6px;
-            font-size: 0.9rem;
-            color: #1a1a1a;
-            background-color: #f8f8f8;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-        select:hover {
-            border-color: #6c5ce7;
-        }
-        input {
-            flex: 1;
-            padding: 0.75rem;
-            border: 1px solid #e0e0e0;
-            border-radius: 6px;
-            font-size: 1rem;
-            color: #1a1a1a;
-            outline: none;
-            transition: all 0.2s ease;
-        }
-        input:focus {
-            border-color: #6c5ce7;
-            box-shadow: 0 0 0 2px rgba(108, 92, 231, 0.1);
-        }
-        .operation-select {
-            margin: 1rem 0;
-            text-align: center;
-        }
-        .result {
-            margin-top: 1rem;
-            padding: 1rem;
-            background-color: #f8f8f8;
-            border-radius: 6px;
-            text-align: center;
-        }
-        .result-value {
-            font-size: 1.1rem;
-            font-weight: 500;
-            color: #1a1a1a;
-            margin: 0.5rem 0;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Advanced Weight Calculator</title>
+  <style>
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .calculator {
+      background-color: #ffffff;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      width: 360px;
+    }
+    .icon {
+      text-align: center;
+      margin: 0 auto 1.5rem;
+    }
+    .icon svg {
+      width: 32px;
+      height: 32px;
+      color: #6c5ce7;
+    }
+    .calculator h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+    .input-group {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    select {
+      padding: 0.5rem;
+      border: 1px solid #e0e0e0;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      color: #1a1a1a;
+      background-color: #f8f8f8;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    select:hover {
+      border-color: #6c5ce7;
+    }
+    input {
+      flex: 1;
+      padding: 0.75rem;
+      border: 1px solid #e0e0e0;
+      border-radius: 6px;
+      font-size: 1rem;
+      color: #1a1a1a;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+    input:focus {
+      border-color: #6c5ce7;
+      box-shadow: 0 0 0 2px rgba(108, 92, 231, 0.1);
+    }
+    .operation-select {
+      margin: 1rem 0;
+      text-align: center;
+    }
+    .result {
+      margin-top: 1rem;
+      padding: 1rem;
+      background-color: #f8f8f8;
+      border-radius: 6px;
+      text-align: center;
+    }
+    .result-value {
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: #1a1a1a;
+      margin: 0.5rem 0;
+    }
+    .error-message {
+      color: #e74c3c;
+      font-size: 0.9rem;
+    }
+  </style>
 </head>
 <body>
 
 <div class="calculator">
-    <div class="icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M6 4v16"/>
-            <path d="M18 4v16"/>
-            <path d="M4 8h4"/>
-            <path d="M16 8h4"/>
-            <path d="M4 16h4"/>
-            <path d="M16 16h4"/>
-        </svg>
-    </div>
-    <h2>Advanced Weight Calculator</h2>
-    <div class="input-group">
-        <select id="unit1" onchange="calculate()">
-            <option value="kg">kg</option>
-            <option value="lbs">lbs</option>
-        </select>
-        <input type="number" id="value1" placeholder="Enter value" oninput="calculate()">
-    </div>
-    <div class="operation-select">
-        <select id="operation" onchange="calculate()">
-            <option value="+">+</option>
-            <option value="-">-</option>
-            <option value="*">×</option>
-            <option value="/">÷</option>
-        </select>
-    </div>
-    <div class="input-group">
-        <select id="unit2" onchange="calculate()">
-            <option value="kg">kg</option>
-            <option value="lbs">lbs</option>
-        </select>
-        <input type="number" id="value2" placeholder="Enter value" oninput="calculate()">
-    </div>
-    <div class="result" id="result">
-        <div class="result-value" id="result-kg"></div>
-        <div class="result-value" id="result-lbs"></div>
-    </div>
+  <div class="icon">
+    <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M31 15H30V11C30 10.4696 29.7893 9.96086 29.4142 9.58579C29.0391 9.21071 28.5304 9 28 9H26V8C26 7.46957 25.7893 6.96086 25.4142 6.58579C25.0391 6.21071 24.5304 6 24 6H21C20.4696 6 19.9609 6.21071 19.5858 6.58579C19.2107 6.96086 19 7.46957 19 8V15H13V8C13 7.46957 12.7893 6.96086 12.4142 6.58579C12.0391 6.21071 11.5304 6 11 6H8C7.46957 6 6.96086 6.21071 6.58579 6.58579C6.21071 6.96086 6 7.46957 6 8V9H4C3.46957 9 2.96086 9.21071 2.58579 9.58579C2.21071 9.96086 2 10.4696 2 11V15H1C0.734784 15 0.48043 15.1054 0.292893 15.2929C0.105357 15.4804 0 15.7348 0 16C0 16.2652 0.105357 16.5196 0.292893 16.7071C0.48043 16.8946 0.734784 17 1 17H2V21C2 21.5304 2.21071 22.0391 2.58579 22.4142C2.96086 22.7893 3.46957 23 4 23H6V24C6 24.5304 6.21071 25.0391 6.58579 25.4142C6.96086 25.7893 7.46957 26 8 26H11C11.5304 26 12.0391 25.7893 12.4142 25.4142C12.7893 25.0391 13 24.5304 13 24V17H19V24C19 24.5304 19.2107 25.0391 19.5858 25.4142C19.9609 25.7893 20.4696 26 21 26H24C24.5304 26 25.0391 25.7893 25.4142 25.4142C25.7893 25.0391 26 24.5304 26 24V23H28C28.5304 23 29.0391 22.7893 29.4142 22.4142C29.7893 22.0391 30 21.5304 30 21V17H31C31.2652 17 31.5196 16.8946 31.7071 16.7071C31.8946 16.5196 32 16.2652 32 16C32 15.7348 31.8946 15.4804 31.7071 15.2929C31.5196 15.1054 31.2652 15 31 15Z" fill="currentColor"/>
+    </svg>
+  </div>
+  <h2>Advanced Weight Calculator</h2>
+  <div class="input-group">
+    <select id="unit1" onchange="calculate()">
+      <option value="kg">kg</option>
+      <option value="lbs">lbs</option>
+    </select>
+    <input type="number" id="value1" placeholder="Enter value" oninput="calculate()" min="0" step="any">
+  </div>
+  <div class="operation-select">
+    <select id="operation" onchange="calculate()">
+      <option value="+">+</option>
+      <option value="-">-</option>
+      <option value="*">×</option>
+      <option value="/">÷</option>
+    </select>
+  </div>
+  <div class="input-group">
+    <select id="unit2" onchange="calculate()">
+      <option value="kg">kg</option>
+      <option value="lbs">lbs</option>
+    </select>
+    <input type="number" id="value2" placeholder="Enter value" oninput="calculate()" min="0" step="any">
+  </div>
+  <div class="result" id="result">
+    <div class="result-value" id="result-kg"></div>
+    <div class="result-value" id="result-lbs"></div>
+  </div>
 </div>
 
 <script>
-    function convertToKg(value, unit) {
-        return unit === "kg" ? value : value / 2.20462;
+  function convertToKg(value, unit) {
+    return unit === "kg" ? value : value / 2.20462;
+  }
+
+  function convertFromKg(value, unit) {
+    return unit === "lbs" ? value * 2.20462 : value;
+  }
+
+  function formatNumber(num) {
+    if (Math.abs(num) < 0.01) return "0";
+    return num.toFixed(2).replace(/\.?0+$/, '');
+  }
+
+  /**
+   * Actualiza los elementos de resultado según el valor y el tipo de resultado.
+   * @param {string} value - El valor a mostrar (ya formateado).
+   * @param {boolean} isError - Indica si se trata de un mensaje de error.
+   */
+  function updateResult(value, isError = false) {
+    const resultKgElement = document.getElementById('result-kg');
+    const resultLbsElement = document.getElementById('result-lbs');
+
+    if (isError) {
+      resultKgElement.innerHTML = `<span class="error-message">${value}</span>`;
+      resultLbsElement.innerHTML = '';
+    } else if (typeof value === 'string') {
+      // Si la cadena incluye "kg²" (multiplicación) o no incluye "kg" (division unitless)
+      // se asume que el valor ya incluye la unidad o es unitless
+      resultKgElement.innerText = value;
+      resultLbsElement.innerText = '';
+    } else {
+      // Por defecto, para resultados en kg
+      const resultKg = parseFloat(value);
+      resultKgElement.innerText = `${formatNumber(resultKg)} kg`;
+      resultLbsElement.innerText = `${formatNumber(resultKg * 2.20462)} lbs`;
+    }
+  }
+
+  function calculate() {
+    const value1 = parseFloat(document.getElementById('value1').value);
+    const unit1 = document.getElementById('unit1').value;
+    const value2 = parseFloat(document.getElementById('value2').value);
+    const unit2 = document.getElementById('unit2').value;
+    const operation = document.getElementById('operation').value;
+
+    if (isNaN(value1) || isNaN(value2)) {
+      updateResult("Please enter valid numbers", true);
+      return;
     }
 
-    function convertFromKg(value, unit) {
-        return unit === "lbs" ? value * 2.20462 : value;
-    }
+    try {
+      let result;
+      let resultUnit = ""; // Por defecto, sin unidad
 
-    function formatNumber(num) {
-        return num.toFixed(2).replace(/\.?0+$/, '');
-    }
-
-    function calculate() {
-        const value1 = parseFloat(document.getElementById('value1').value);
-        const unit1 = document.getElementById('unit1').value;
-        const value2 = parseFloat(document.getElementById('value2').value);
-        const unit2 = document.getElementById('unit2').value;
-        const operation = document.getElementById('operation').value;
-
-        if (isNaN(value1) || isNaN(value2)) {
-            document.getElementById('result-kg').innerText = "Please enter valid numbers";
-            document.getElementById('result-lbs').innerText = "";
-            return;
+      switch (operation) {
+        case '+': {
+          // Para suma: convertir ambos valores a kg y sumarlos
+          const value1Kg = convertToKg(value1, unit1);
+          const value2Kg = convertToKg(value2, unit2);
+          result = value1Kg + value2Kg;
+          resultUnit = "kg"; // Resultado en kg
+          break;
         }
-
-        // Convert both values to kg for calculation
-        const value1Kg = convertToKg(value1, unit1);
-        const value2Kg = convertToKg(value2, unit2);
-
-        let resultKg;
-        switch (operation) {
-            case '+':
-                resultKg = value1Kg + value2Kg;
-                break;
-            case '-':
-                resultKg = value1Kg - value2Kg;
-                break;
-            case '*':
-                resultKg = value1Kg * value2Kg;
-                break;
-            case '/':
-                if (value2Kg === 0) {
-                    document.getElementById('result-kg').innerText = "Cannot divide by zero";
-                    document.getElementById('result-lbs').innerText = "";
-                return;
-                }
-                resultKg = value1Kg / value2Kg;
-                break;
+        case '-': {
+          // Para resta: convertir ambos valores a kg y restarlos
+          const v1Kg = convertToKg(value1, unit1);
+          const v2Kg = convertToKg(value2, unit2);
+          result = v1Kg - v2Kg;
+          resultUnit = "kg"; // Resultado en kg
+          break;
         }
+        case '*': {
+          // Para multiplicación: convertir ambos a kg y multiplicar
+          const val1Kg = convertToKg(value1, unit1);
+          const val2Kg = convertToKg(value2, unit2);
+          result = val1Kg * val2Kg;
+          resultUnit = "kg²"; // Resultado en kg² (unidades al cuadrado)
+          break;
+        }
+        case '/': {
+          if (value2 === 0) {
+            throw new Error("Cannot divide by zero");
+          }
+          if (unit1 === unit2) {
+            // Si las unidades son iguales, el resultado es unitless
+            result = value1 / value2;
+            resultUnit = ""; // Sin unidad
+          } else {
+            // Si las unidades son diferentes, se convierten ambos a kg y se divide
+            const dividend = convertToKg(value1, unit1);
+            const divisor = convertToKg(value2, unit2);
+            result = dividend / divisor;
+            resultUnit = ""; // Sin unidad
+          }
+          break;
+        }
+        default:
+          throw new Error("Invalid operation");
+      }
 
-        const resultLbs = convertFromKg(resultKg, 'lbs');
-        
-        document.getElementById('result-kg').innerText = `${formatNumber(resultKg)} kg`;
-        document.getElementById('result-lbs').innerText = `${formatNumber(resultLbs)} lbs`;
+      if (!isFinite(result)) {
+        throw new Error("Result is too large to display");
+      }
+
+      // Mostrar el resultado según la operación
+      if (resultUnit === "") {
+        // Resultados unitless (por división con mismas unidades o conversiones)
+        updateResult(`${formatNumber(result)}`, false);
+      } else if (resultUnit === "kg²") {
+        // Para multiplicación, mostrar con "kg²"
+        updateResult(`${formatNumber(result)} kg²`, false);
+      } else {
+        // Para suma y resta, mostrar en kg (y en lbs en el otro campo)
+        updateResult(`${formatNumber(result)} kg`, false);
+      }
+
+    } catch (error) {
+      updateResult(error.message, true);
     }
+  }
 
-   // Solo calcular si hay valores iniciales
-if (document.getElementById('value1').value && document.getElementById('value2').value) {
-    calculate();
-}
+  // Inicializar los event listeners para el enter en los inputs
+  document.addEventListener('DOMContentLoaded', () => {
+    const inputs = document.querySelectorAll('input[type="number"]');
+    inputs.forEach(input => {
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          calculate();
+        }
+      });
+    });
+  });
 </script>
 
 </body>
 </html>
-
-Version 3 of 3
