@@ -1,53 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>From Zero to Hero</title>
-  <!-- Load a more aesthetic Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <!-- Load the Raleway font -->
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    /* Define styles and ensure responsiveness */
+    /* Define color variables for light mode */
+    :root {
+      --bg-color: #F6F3ED;
+      --text-color: #2E3338;
+      --gradient-start: #6c5ce7;
+      --gradient-end: #8e44ad;
+    }
+
+    /* Dark mode overrides */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-color: #121212;
+        --text-color: #E0E0E0;
+        --gradient-start: #8e44ad;
+        --gradient-end: #6c5ce7;
+      }
+    }
+
     body {
       margin: 0;
       padding: 0;
+      background-color: var(--bg-color);
       display: flex;
       justify-content: center;
       align-items: center;
-      min-height: 100vh;
-      width: 100vw;
-      background-color: #f0f0f0;
-      font-family: 'Poppins', sans-serif;
+      height: 100vh;
+      font-family: 'Raleway', sans-serif;
     }
+
     .phrase {
-      /* Use clamp() for responsive font-size */
-      font-size: clamp(24px, 5vw, 48px);
-      font-weight: 700;
       text-align: center;
       padding: 20px;
       box-sizing: border-box;
       max-width: 90%;
       line-height: 1.2;
-      /* Gradient text styling */
-      background: linear-gradient(45deg, #6c5ce7, #8e44ad);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-      /* Allow text wrapping */
-      word-wrap: break-word;
-      overflow-wrap: break-word;
-      opacity: 0; /* Start invisible */
-      animation: fadeIn 2s ease-in-out forwards; /* Fade-in animation */
+      /* Responsive font size between 24px and 48px */
+      font-size: clamp(24px, 5vw, 48px);
+      font-weight: 700;
     }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+
+    /* Ensure each word is on its own line */
+    .phrase span {
+      display: block;
+      margin: 5px 0;
+      overflow-wrap: break-word;
     }
   </style>
 </head>
 <body>
   <div class="phrase">
-    From Zero to Hero
+    <span>From</span>
+    <span>Zero</span>
+    <span>to</span>
+    <span>Hero</span>
   </div>
 </body>
 </html>
